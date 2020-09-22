@@ -137,7 +137,7 @@ double demora (funcion f, int alto, int ancho=0)
 }
 /// ////////////////////////////////////////////*/
 
-/// Functor que mide la demora de una función ////
+/// Functor que mide la demora de una funciÃ³n ////
 class cronometro
 {
     funcion f;
@@ -162,6 +162,7 @@ public:
 };
 /// ////////////////////////////////////////////*/
 
+/// Rutina de Tabulacion de vectores /////////////
 template <class T, class... TY>
 void tabulador(vector<T> X, TY... Ys)
 {
@@ -176,7 +177,7 @@ void tabulador(vector<T> X, TY... Ys)
 }
 /// ////////////////////////////////////////////*/
 
-/// Rutina de Tabulacion de vectores /////////////
+/// Rellenador de vectores por interpolacion /////
 template <class T>
 void interpolar(vector<T>& v,T inicio,T incremento,T fin)
 {
