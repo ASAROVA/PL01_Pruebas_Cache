@@ -29,6 +29,13 @@ matriz<T> multibloque (const matriz<T>* A, const matriz<T>* B, int n=3)
 {
     if (!n) return (*A)*(*B);
 
+    /// /
+    cout << "A = " << "\t\t\t\t\t\tn = " << n; SL;
+    cout << *A; SL;SL;
+    cout << "B = " << "\t\t\t\t\t\tn = " << n; SL;
+    cout << *B; SL;SL;
+    /// */
+
     int mm = B->nfilas;
     int m  = B->nfilas/2;
 
@@ -42,9 +49,6 @@ matriz<T> multibloque (const matriz<T>* A, const matriz<T>* B, int n=3)
         for (;j<mm;j++) A2[i][j-m] = (*A)[i][j];
     }
 
-    cout << A1; SL;SL;
-    cout << A2; SL;SL;
-
     matriz<T> B1 ( m, B->ncolum);
     matriz<T> B2 ( mm-m, B->ncolum);
 
@@ -55,10 +59,14 @@ matriz<T> multibloque (const matriz<T>* A, const matriz<T>* B, int n=3)
         for (;j<mm;j++) B2[j-m][i] = (*B)[j][i];
     }
 
-    cout << B1; SL;SL;
-    cout << B2; SL;SL;
+    matriz<T> P = multibloque(&A1,&B1,n-1) + multibloque(&A2,&B2,n-1);
 
-    return multibloque(&A1,&B1,n-1) + multibloque(&A2,&B2,n-1);
+    /// /
+    cout << "P = " << "\t\t\t\t\t\tn = " << n; SL;
+    cout << P; SL;SL;
+    /// /
+
+    return P;
 }
 
 template<class T>
@@ -223,8 +231,8 @@ int main(void)
     funcion f;
 
     //vector<int> tamannos {100,200,400,800,1600};
-    //vector<int> tamannos {100,200,400};
-    vector<int> tamannos; interpolar(tamannos,100,100,1000);
+    vector<int> tamannos {128,256,512,1024,2048,4096};
+    //vector<int> tamannos; interpolar(tamannos,100,100,1000);
 
     cout << "Tabla de Demoras (seg)"; SL;SL;
     cout << "Tamanno lado\t" << "Prod. Normal\t" << "Prod. Bloques\t"; SL;
@@ -277,14 +285,17 @@ int main(void)
 
     matrint M (8,8);
     M.rellenar();
-    cout << M; SL;SL;
+    //cout << M; SL;SL;
 
     matrint N (8,8);
     N.rellenar();
-    cout << N; SL;SL;
+    //cout << N; SL;SL;
 
-    //cout << multibloque(&M,&N); SL;SL;
-    cout << M.mbloque(N); SL;SL;
+    matrint P = M.mbloque(N);
+
+    cout << "Multibloque(M,N) = "; SL;
+    cout << P; SL;SL;
+    cout << "M * N = "; SL;
     cout << M*N; SL;SL;
 
     /// ////////////////////////////////////////////*/
